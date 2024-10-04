@@ -1,0 +1,88 @@
+api:
+  version: 1.0
+  title: Recipe CRUD API
+  description: API for managing recipes with authentication
+  base_url: /api/v1
+
+authentication:
+  type: API Key
+  header_name: X-API-Key
+  required: true
+
+endpoints:
+  - path: /recipes
+    methods:
+      - GET:
+          description: Get all recipes
+          responses:
+            200: Success
+            401: Unauthorized
+      - POST:
+          description: Create a new recipe
+          request_body:
+            type: application/json
+            required: true
+            schema:
+              properties:
+                title: 
+                  type: string
+                  description: Title of the recipe
+                ingredients: 
+                  type: array
+                  description: List of ingredients
+                instructions:
+                  type: string
+                  description: Instructions for the recipe
+          responses:
+            201: Created
+            401: Unauthorized
+            400: Bad Request
+  - path: /recipes/{id}
+    methods:
+      - GET:
+          description: Get a recipe by ID
+          parameters:
+            - name: id
+              in: path
+              required: true
+              type: integer
+          responses:
+            200: Success
+            404: Recipe not found
+            401: Unauthorized
+      - PUT:
+          description: Update a recipe by ID
+          parameters:
+            - name: id
+              in: path
+              required: true
+              type: integer
+          request_body:
+            type: application/json
+            schema:
+              properties:
+                title: 
+                  type: string
+                  description: Title of the recipe
+                ingredients: 
+                  type: array
+                  description: List of ingredients
+                instructions:
+                  type: string
+                  description: Instructions for the recipe
+          responses:
+            200: Updated
+            404: Recipe not found
+            401: Unauthorized
+      - DELETE:
+          description: Delete a recipe by ID
+          parameters:
+            - name: id
+              in: path
+              required: true
+              type: integer
+          responses:
+            204: No Content
+            404: Recipe not found
+            401: Unauthorized
+
