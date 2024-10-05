@@ -1,4 +1,4 @@
-# Task Force Competition: Recipe CRUD API
+# Task Force: Recipe CRUD API
 
 ## Introduction
 
